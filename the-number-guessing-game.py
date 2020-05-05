@@ -1,37 +1,43 @@
-"""
-Python Web Development Techdegree
-Project 1 - Number Guessing Game
---------------------------------
-
-For this first project we will be using Workspaces. 
-
-NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
-
-"""
-
 import random
 
-
 def start_game():
-    """Psuedo-code Hints
-    
-    When the program starts, we want to:
-    ------------------------------------
-    1. Display an intro/welcome message to the player.
-    2. Store a random number as the answer/solution.
-    3. Continuously prompt the player for a guess.
-      a. If the guess greater than the solution, display to the player "It's lower".
-      b. If the guess is less than the solution, display to the player "It's higher".
-    
-    4. Once the guess is correct, stop looping, inform the user they "Got it"
-         and show how many attempts it took them to get the correct number.
-    5. Let the player know the game is ending, or something that indicates the game is over.
-    
-    ( You can add more features/enhancements if you'd like to. )
-    """
-    # write your code inside this function.
-
-
-
-# Kick off the program by calling the start_game function.
+    print("Welcome to The Number Guessing Game!")
+    number = random.randint(1, 10)
+    high_score = 10
+    attempts = 0
+    print("The highscore is {} attempts.".format(high_score))
+    while attempts <= 100:
+        try:
+            guess = int(input("Please guess a number from 1-10:  "))
+            if guess == number:
+                print("You got it! Congratulations you have won!")
+                attempts += 1
+                if attempts < high_score:
+                    high_score = attempts 
+                print("It took you {} attempt(s). Game over.".format(attempts))
+                print("The highscore is {} attempts.".format(high_score))
+                attempts = 0
+                answer = (input("Would you like to play again? (yes/no):  "))
+                if answer == "yes" or "YES" or "Yes":
+                    continue
+                elif answer == "no" or "NO" or "No":
+                    break
+                else:
+                    print("Sorry but that is not a valid choice. Try again.")
+                    answer = (input("Would you like to play again? (yes/no):  "))
+            elif guess > int(10):
+                print("Your guess was outside of the guessing range. Try again.")
+            elif guess < int(1):
+                print("Your guess was outside of the guessing range. Try again.")
+            elif guess < number:
+                print("Your guess was too low. Try again.")
+                attempts += 1
+                print("You are at {} attempt(s)".format(attempts))
+            elif guess > number:
+                print("Your guess was too high. Try again.")
+                attempts += 1
+                print("You are at {} attempt(s)".format(attempts))
+        except ValueError:
+            print("Sorry but that is not a valid choice. Try again.")        
 start_game()
+        
